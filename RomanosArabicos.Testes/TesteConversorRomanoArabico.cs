@@ -8029,5 +8029,20 @@ namespace RomanosArabicos.Testes
             Assert.AreEqual(resultadoEsperado, resultadoReal);
 
         }
+
+        [TestMethod]
+        [DataRow("XIIIIV", 17)]
+        [DataRow(".;/liuhghjk´~", int.MinValue)]
+        [DataRow("XC", 90)]
+        public void Test_Conversao_Romanos_Para_Arabicos(string romanoAhConverter, int resultadoEsperado)
+        {
+            Conversor conversor = new Conversor();
+
+            var resultadoReal = conversor.ConverterRomanoParaArabico(romanoAhConverter);
+
+            Assert.AreEqual(resultadoEsperado, resultadoReal);
+
+        }
+
     }
 }

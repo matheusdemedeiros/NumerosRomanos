@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace NumerosRomanos
 {
@@ -26,7 +27,7 @@ namespace NumerosRomanos
             1,4,5,9,10,40,50,90,100,400,500,900,1000
         };
 
-        private Dictionary<char, int> algarisomosRomanos = new Dictionary<char, int>
+        private Dictionary<char, int> algarismosRomanos = new Dictionary<char, int>
         {
             {'I', 1},
             {'V', 5},
@@ -41,23 +42,30 @@ namespace NumerosRomanos
         {
             var resultado = 0;
 
-            if (valor.Replace(" ","").Length == 0 || string.IsNullOrEmpty(valor))
+            if (valor.Replace(" ", "").Length == 0 || string.IsNullOrEmpty(valor))
                 return resultado;
 
+            if (Regex.IsMatch(valor, "[^a-zA-Z]+", RegexOptions.IgnoreCase))
+                return int.MinValue;
+
             var romanos = valor.ToUpper().ToCharArray();
+
+            foreach (var item in romanos)
+                if (!algarismosRomanos.ContainsKey(item))
+                    return int.MinValue;
 
             for (int i = 0; i <= romanos.Length - 1; i++)
             {
                 if (i == romanos.Length - 1)
                 {
-                    resultado += algarisomosRomanos[romanos[i]];
+                    resultado += algarismosRomanos[romanos[i]];
                     return resultado;
                 }
 
-                var romanoAtual = algarisomosRomanos[romanos[i]];
+                var romanoAtual = algarismosRomanos[romanos[i]];
 
                 var proximoRomano = i + 1;
-                var next = algarisomosRomanos[romanos[proximoRomano]];
+                var next = algarismosRomanos[romanos[proximoRomano]];
 
                 if (romanoAtual < next)
                     resultado -= romanoAtual;
