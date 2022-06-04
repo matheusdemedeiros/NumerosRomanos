@@ -41,6 +41,9 @@ namespace NumerosRomanos
         {
             var resultado = 0;
 
+            if (valor.Replace(" ","").Length == 0 || string.IsNullOrEmpty(valor))
+                return resultado;
+
             var romanos = valor.ToUpper().ToCharArray();
 
             for (int i = 0; i <= romanos.Length - 1; i++)

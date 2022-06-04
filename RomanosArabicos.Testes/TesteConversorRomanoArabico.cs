@@ -4020,6 +4020,7 @@ namespace RomanosArabicos.Testes
 
         [TestMethod]
         [DataRow("", 0)]
+        [DataRow("     ", 0)]
         [DataRow("I", 1)]
         [DataRow("II", 2)]
         [DataRow("III", 3)]
